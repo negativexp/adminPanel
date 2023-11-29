@@ -1,0 +1,39 @@
+nav {
+    background: red;
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    transition: all 2s ease;
+    position: relative;
+}
+nav.open {
+    width: 200px;
+}
+nav.close {
+    width: 70px;
+    align-items: center;
+}
+nav.close a {
+    gap: 0px;
+}
+nav.close a span {
+    display: none;
+}
+nav.close .logo p {
+    display: none;
+}
+nav a {
+    display: flex;
+    gap: 10px;
+    padding: 0 20px;
+}
+nav .logo {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+nav .navButton:hover {
+    cursor: pointer;
+}
