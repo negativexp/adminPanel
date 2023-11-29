@@ -1,5 +1,6 @@
 function nav() {
-    const nav = document.querySelector("nav");
+    const nav = document.querySelector("nav")
+
     if(nav.classList.contains("open")) {
         nav.classList.remove("open")
         nav.classList.add("close")
