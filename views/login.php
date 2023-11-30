@@ -1,10 +1,3 @@
-<?php
-if(isset($_SESSION["user"])) {
-    header("location: ./");
-    exit();
-}
-global $dir, $componentsDir;
-?>
 <form id="login" method="post">
     <img src="./static/img/pixee.svg">
     <?php

@@ -1,10 +1,18 @@
 <?php
-    global $dir, $staticDir;
+global $baseURL;
+$charset = "UTF-8";
+$viewport = "width=device-width, initial-scale=1.0";
+$compatibility = "ie=edge";
+$title = "Administrace";
+$cssLink = "{$baseURL}static/css/style.css";
+$jsLink = "{$baseURL}static/js/script.js";
 ?>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Administrace</title>
-    <link rel="stylesheet" href="<?=$staticDir?>css/style.css">
+    <meta charset="<?= $charset ?>">
+    <meta name="viewport" content="<?= $viewport ?>">
+    <meta http-equiv="X-UA-Compatible" content="<?= $compatibility ?>">
+    <title><?= $title ?></title>
+    <link rel="stylesheet" href="<?= $cssLink ?>">
+    <script defer src="<?= $jsLink ?>"></script>
 </head>
