@@ -7,7 +7,7 @@ if(isset($_GET["smazat"])) {
     if(!$db->executeQuery($sql, $params, false)) {
         echo "Chyba při mazání!";
     } else {
-        header("location: ./?page=contactForm");
+        header("location: ./kontaktniFormular");
     }
 }
 ?>
@@ -34,7 +34,7 @@ if(isset($_GET["smazat"])) {
         echo "<td>{$row["name"]}</td>";
         echo "<td>{$row["email"]}</td>";
         echo "<td><textarea disabled>{$row["message"]}</textarea></td>";
-        echo "<td><a class='button' href='?page=contactForm&smazat={$row["ID"]}'>Smazat</a></td>";
+        echo "<td><a class='button' href='?smazat={$row["ID"]}'>Smazat</a></td>";
         echo "</tr>";
     }
     ?>

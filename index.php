@@ -62,7 +62,9 @@ if (!isset($_SESSION["user"])) {
     }
     include_once "./views/nav.php";
     echo "<main>";
-    switch ($requestURI) {
+    //parsne URL bez ? hodnot
+    $parsedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    switch ($parsedUrl) {
         case $baseURL."login/":
             header("location: /admin");
             break;
