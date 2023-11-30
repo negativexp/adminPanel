@@ -1,8 +1,6 @@
 RewriteEngine On
-
-# Exclude existing files or directories from rewriting
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Redirect all requests to index.php in the /admin/ directory
+# Všechny requesty jdou přes ./admin/index.php
 RewriteRule ^(.*)$ /admin/index.php [L]

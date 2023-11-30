@@ -1,9 +1,9 @@
 <?php
 class Database {
     private $servername = "localhost";
-    private $dbusername = "pixee";
-    private $dbpassword = "idAoIASHwer51sdsih";
-    private $database = "pixee";
+    private $dbusername = "root";
+    private $dbpassword = "pass";
+    private $database = "db_name";
     private $conn;
     public function __construct() {
         $this->connect();
@@ -24,7 +24,7 @@ class Database {
     public function executeQuery($sql, $params = [], $returnResult = true) {
         $stmt = $this->conn->prepare($sql);
         if ($stmt === false) {
-            die("Error in prepare statement: " . $this->conn->error);
+            die("Chyba v priprave statementu: " . $this->conn->error);
         }
         if (!empty($params)) {
             $types = '';
@@ -45,20 +45,19 @@ class Database {
         }
         $stmt->execute();
         if ($stmt->error) {
-            die("Error in execute statement: " . $stmt->error);
+            die("chyba zpusteni statementu: " . $stmt->error);
         }
         if ($returnResult) {
             $result = $stmt->get_result();
             if ($result === false) {
-                die("Error in getting result: " . $stmt->error);
+                die("chyba ziskani hodnoty: " . $stmt->error);
             }
             return $result;
         }
 
-        // For non-select queries like DELETE, UPDATE, or INSERT
-        // Return a boolean indicating success or failure
         $success = ($stmt->affected_rows > 0) ? true : false;
         $stmt->close();
+        $this->disconnect();
         return $success;
     }
     public function fetchRows($result) {
@@ -72,7 +71,7 @@ class Database {
         if ($result->num_rows > 0) {
             return $result->fetch_assoc();
         } else {
-            return null; // Return null if no rows are found
+            return null;
         }
     }
 }

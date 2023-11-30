@@ -1,4 +1,6 @@
 <?php
+//priklad
+
 require "../admin/components/db.php";
 if(isset($_GET["smazat"])) {
     $db = new Database();
@@ -23,6 +25,7 @@ if(isset($_GET["smazat"])) {
     </thead>
     <tbody>
     <?php
+    //dalsi priklad
     include "../admin/components/useful.php";
     $db = new Database();
     $sql = "select * from contact_forms";
