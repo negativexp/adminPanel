@@ -1,8 +1,5 @@
-<?php
-global $dir;
-?>
 <form id="login" method="post">
-    <img src="<?=$dir?>/static/img/pixee.svg">
+    <img src="./static/img/pixee.svg">
     <?php
     if(isset($_POST["username"]) && isset($_POST["password"])) {
         require $dir."/components/db.php";
