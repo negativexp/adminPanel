@@ -1,11 +1,11 @@
 <?php
 session_start();
-$isLocal = strpos($_SERVER['HTTP_HOST'], 'localhost') != false || $_SERVER['HTTP_HOST'] === '127.0.0.1';
+$isLocal = ($_SERVER['SERVER_NAME'] === 'localhost') || ($_SERVER['SERVER_ADDR'] === '127.0.0.1');
 //lokalni adresa a serverova adresa
 $baseURL = $isLocal ? '/' : '/admin/';
 $requestURI = $_SERVER['REQUEST_URI'];
 
-if (strpos($requestURI, "/static/") == 0) {
+if (strpos($requestURI, "/static/") === 0) {
     $filePath = $isLocal ? "." . $requestURI : $_SERVER['DOCUMENT_ROOT'] . $baseURL . ltrim($requestURI, '/');
 
     if (file_exists($filePath)) {
@@ -63,7 +63,7 @@ if (!isset($_SESSION["user"])) {
     $parsedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     switch ($parsedUrl) {
         case $baseURL."login/":
-            header("location: ./");
+            header("location: {$baseURL}");
             break;
         case $baseURL:
             echoHeader("Vítej!");
