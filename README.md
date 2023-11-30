@@ -1,5 +1,5 @@
 # Šablona pro administrační (jakýkoliv) panel
-Toto je moje šablona která zahrnuje třídu pro připojení se na mysql databázi.
+Toto je moje šablona která zahrnuje třídu pro připojení se na mysql databázi a lehkej design pro administrační (jakýkoliv) panel.
 ## Úprava
 S úmyslem byla jednoduchost, chci aby tento projekt byl lehce upravitelný pro ty co ví co dělají, nebo aspoň si myslí.
 Netřeba se bát ohledně cest ke souborám, v ```index.php``` (routovací skript) je ```$baseURL``` který vede hlavní cestu ke souborám, ať
