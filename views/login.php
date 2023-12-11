@@ -1,13 +1,12 @@
 <form id="login" method="post">
-    <img src="./static/img/pixee.svg">
+    <img src="/static/public/img/pixee.svg">
     <?php
     if(isset($_POST["username"]) && isset($_POST["password"])) {
         //dev podmínka
         //smazat při produkci
         if($_POST["username"] == "admin" && $_POST["password"] == "admin") {
-            session_start();
             $_SESSION["user"] = true;
-            header("location: ./admin");
+            echo '<script>window.location.href = "/admin/";</script>';
         } else {
             require "./components/db.php";
             $db = new Database();

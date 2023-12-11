@@ -4,8 +4,8 @@ $charset = "UTF-8";
 $viewport = "width=device-width, initial-scale=1.0";
 $compatibility = "ie=edge";
 $title = "Administrace";
-$cssLink = "{$baseURL}static/css/style.css";
-$jsLink = "{$baseURL}static/js/script.js";
+$cssLink = "{$baseURL}static/admin/css/style.css";
+$jsLink = "{$baseURL}static/admin/js/script.js";
 ?>
 
 <head>

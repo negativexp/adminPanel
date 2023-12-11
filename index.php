@@ -34,8 +34,6 @@ if (strpos($requestURI, "/static/") === 0) {
     }
 }
 
-include_once "./components/head.php";
-
 function echoHeader($text) {
     echo "<header><h1>{$text}</h1></header>";
 }
@@ -48,51 +46,41 @@ function echoContent($includePath) {
 //parsne URL bez ? hodnot
 $parsedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-if(isset($_SESSION["user"])) {
-    switch ($parsedUrl) {
-        case $baseURL."login/":
-            header("location: {$baseURL}");
-            break;
-        case $baseURL:
-            echoHeader("Vítej!");
-            break;
-        case $baseURL."kontaktniFormular":
-            echoHeader("Kontaktní Formulář");
-            echoContent("./views/kontaktniFormular.php");
-            break;
-        case $baseURL . "test":
-            echo "test";
-            break;
-        case $baseURL . "logout":
-            include_once "./components/logout.php";
-            break;
-        default:
-            http_response_code(404);
-            echo '404 Page Not Found';
-            break;
-    }
+switch ($parsedUrl) {
+    // PUBLIC STRÁNKOVÁNÍ (public)
+    case $baseURL:
+        echo "index";
+        break;
+    // ADMIN STRÁNKOVÁNÍ (private)
+    case $baseURL."admin" || $baseURL."admin/":
+        include_once "./components/adminHead.php";
+        if(isset($_SESSION["user"])) {
+            include_once "./views/nav.php";
+            echo "<main>";
+            if($parsedUrl === $baseURL."admin" || $parsedUrl === $baseURL."admin/") {
+                echoHeader("Administrařní dashboard");
+            }
+            if($parsedUrl === $baseURL."admin/kontaktniFormular") {
+                echoHeader("Kontaktní Formulář");
+                include_once "./views/kontaktniFormular.php";
+            }
+            if($parsedUrl === $baseURL."admin/logout") {
+                include_once "./components/logout.php";
+            }
+            echo "</main>";
+        } else {
+            include_once "./views/login.php";
+        }
+        break;
+    // default
+    default:
+        echo "404!!!";
+        break;
 }
 
-if($parsedUrl === $baseURL."admin" || $parsedUrl === $baseURL."admin/") {
-    include_once "./views/login.php";
+if($parsedUrl === $baseURL."/admin" || $parsedUrl === $baseURL."/admin/") {
+    header("location: admin/login/");
     exit();
 }
 
-// pokud uzivatel neni prihlasen
-if (!isset($_SESSION["user"])) {
-    //pokud url request se rovna k localhost/login
-    if($requestURI === $baseURL . "admin") {
-        include_once "./views/login.php";
-        exit();
-    }
-    //jinak nic...
-} else {
-    include_once "./views/nav.php";
-    echo "<main>";
-
-    echo "</main>";
-}
-if(isset($_SESSION["user"])) {
-
-    exit();
-}
+exit();
