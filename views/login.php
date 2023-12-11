@@ -7,7 +7,7 @@
         if($_POST["username"] == "admin" && $_POST["password"] == "admin") {
             session_start();
             $_SESSION["user"] = true;
-            header("location: ./");
+            header("location: ./admin");
         } else {
             require "./components/db.php";
             $db = new Database();

@@ -36,31 +36,19 @@ if (strpos($requestURI, "/static/") === 0) {
 
 include_once "./components/head.php";
 
-// pokud uzivatel neni prihlasen
-if (!isset($_SESSION["user"])) {
-    if($requestURI === $baseURL . "login") {
-        include_once "./views/login.php";
-        exit();
-    } else {
-        header("location: {$baseURL}login");
-        exit();
-    }
-} else {
-    // pokud uzivtal je prihlasen
-    // routing...
-    function echoHeader($text) {
-        echo "<header><h1>{$text}</h1></header>";
-    }
-    function echoContent($includePath) {
-        echo "<div class='content'>";
-        include_once($includePath);
-        echo "</div>";
-    }
+function echoHeader($text) {
+    echo "<header><h1>{$text}</h1></header>";
+}
+function echoContent($includePath) {
+    echo "<div class='content'>";
+    include_once($includePath);
+    echo "</div>";
+}
 
-    include_once "./views/nav.php";
-    echo "<main>";
-    //parsne URL bez ? hodnot
-    $parsedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+//parsne URL bez ? hodnot
+$parsedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+if(isset($_SESSION["user"])) {
     switch ($parsedUrl) {
         case $baseURL."login/":
             header("location: {$baseURL}");
@@ -83,5 +71,28 @@ if (!isset($_SESSION["user"])) {
             echo '404 Page Not Found';
             break;
     }
+}
+
+if($parsedUrl === $baseURL."admin" || $parsedUrl === $baseURL."admin/") {
+    include_once "./views/login.php";
+    exit();
+}
+
+// pokud uzivatel neni prihlasen
+if (!isset($_SESSION["user"])) {
+    //pokud url request se rovna k localhost/login
+    if($requestURI === $baseURL . "admin") {
+        include_once "./views/login.php";
+        exit();
+    }
+    //jinak nic...
+} else {
+    include_once "./views/nav.php";
+    echo "<main>";
+
     echo "</main>";
+}
+if(isset($_SESSION["user"])) {
+
+    exit();
 }
